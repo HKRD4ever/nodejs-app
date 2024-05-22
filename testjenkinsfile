@@ -4,6 +4,7 @@ pipeline{
       stage('Dep install'){
         agent { docker { image 'node:14' } }
         steps{
+            sh 'sudo -i'
             sh 'cat /etc/os-release'
             sh 'exit'
             sh 'apt update'
