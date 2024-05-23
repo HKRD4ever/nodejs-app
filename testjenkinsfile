@@ -1,4 +1,18 @@
 pipeline{
+  agent any
+  stages{
+    stage('dep install'){
+      steps{
+        sh 'npm install'
+      }
+    }
+  }
+}
+
+
+
+
+/* pipeline{
     agent { docker { image 'node:14'
            args '-u root:root'}}
     stages{
@@ -15,4 +29,4 @@ pipeline{
         }
       } 
     }
-}
+} */
