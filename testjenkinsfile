@@ -1,5 +1,67 @@
 pipeline {
     agent any
+
+    tools {
+        nodejs 'NodeJS 14.x' // This should match the name you configured in the Global Tool Configuration
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+
+        stage('Install Dependencies') {
+            steps {
+                sh 'npm install'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                sh 'npm run build'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                sh 'npm test'
+            }
+        }
+
+        stage('Package') {
+            steps {
+                sh 'npm run package'
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                sh 'npm run deploy'
+            }
+        }
+    }
+
+    post {
+        always {
+            echo 'Cleaning up...'
+            cleanWs()
+        }
+        success {
+            echo 'Pipeline succeeded!'
+        }
+        failure {
+            echo 'Pipeline failed!'
+        }
+    }
+}
+
+
+
+
+/* pipeline {
+    agent any
     
     stages {
         stage('Checkout') {
@@ -53,7 +115,7 @@ pipeline {
     }
 }
 
-
+ */
 /* pipeline{
   agent any
   stages{
