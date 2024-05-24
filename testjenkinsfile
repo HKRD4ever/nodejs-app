@@ -7,7 +7,7 @@ pipeline{
             sh 'cat /etc/os-release'
             sh 'exit'
             sh 'sudo apt-get update'
-            sh 'sudo apt install sudo -y'
+            sh 'apt install sudo -y'
             sh 'sudo chown -R 995:993 "/.npm"'
             sh 'npm install'
         }
