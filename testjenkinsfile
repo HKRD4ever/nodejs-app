@@ -5,6 +5,7 @@ pipeline {
             agent { docker { image 'node:14' } }
             steps {
                 sh 'cat /etc/os-release'
+                sh 'chown -R _apt /var/lib/apt/lists /var/cache/apt/archives/partial'
                 sh 'apt-get update'
                 sh 'apt-get install -y'
                 sh 'chown -R 995:993 "/.npm"'
@@ -13,6 +14,7 @@ pipeline {
         }
     }
 }
+
 
 
 /* pipeline{
