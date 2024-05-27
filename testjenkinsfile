@@ -1,4 +1,31 @@
 pipeline {
+    agent { docker { image 'node:14' args '-u root:root' } }
+    stages {
+        stage('Dep install') {            
+            steps {
+                // Ensure correct permissions for npm
+                sh 'chown -R root:root /usr/local/lib/node_modules /usr/local/bin /usr/local/share'
+                // Install npm dependencies
+                sh 'npm install'
+            }
+        }
+        stage('Package') {
+            steps {
+                // Package the application
+                sh 'npm pack'
+            }
+        }
+    }
+    post {
+        always {
+            // Optional: Clean up or archive artifacts, send notifications, etc.
+            // echo 'Post-build actions can be defined here.'
+        }
+    }
+}
+
+
+/*pipeline {
     agent { docker { image 'node:14'
             arg '-u root:root' } }
     stages {
@@ -19,7 +46,7 @@ pipeline {
         }
     }
 }
-
+*/
 
 
 /* pipeline{
