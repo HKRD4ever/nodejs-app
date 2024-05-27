@@ -1,27 +1,23 @@
-pipeline {
-    agent { docker { image 'node:14' args '-u root:root' } }
-    stages {
-        stage('Dep install') {            
-            steps {
-                // Ensure correct permissions for npm
-                sh 'chown -R root:root /usr/local/lib/node_modules /usr/local/bin /usr/local/share'
-                // Install npm dependencies
-                sh 'npm install'
-            }
-        }
-        stage('Package') {
-            steps {
-                // Package the application
-                sh 'npm pack'
-            }
+
+pipeline{
+   agent any 
+   tools{
+    maven 'M2_HOME'
+   }
+   stages{
+    stage("maven"){
+        steps{ 
+        sh 'mvn clean validate compile install test package'
         }
     }
-    post {
-        always {
-            // Add at least one step here, such as a simple echo statement
-            echo 'Build completed'
+    stage('upload artifact'){
+        steps{
+            sh 'curl -uadmin:AP8gcgmmset5jeYChTJYDN6XmDd -T \
+            target/bio*.jar \
+            "http://ec2-54-161-239-95.compute-1.amazonaws.com:8081/artifactory/geolocation/geo/bio_${BUILD_ID}.jar"'
         }
     }
+   }
 }
 
 
