@@ -2,8 +2,7 @@ pipeline {
     agent { docker { image 'node:14'
             arg '-u root:root' } }
     stages {
-        stage('Dep install') {
-            
+        stage('Dep install') {            
             steps {
                 //sh 'cat /etc/os-release'
                 //sh 'chown -R _apt /var/lib/apt/lists /var/cache/apt/archives/partial'
