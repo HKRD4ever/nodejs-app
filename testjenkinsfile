@@ -18,11 +18,12 @@ pipeline {
     }
     post {
         always {
-            // Optional: Clean up or archive artifacts, send notifications, etc.
-            // echo 'Post-build actions can be defined here.'
+            // Add at least one step here, such as a simple echo statement
+            echo 'Build completed'
         }
     }
 }
+
 
 
 /*pipeline {
