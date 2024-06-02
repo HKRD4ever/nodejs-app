@@ -25,7 +25,6 @@ pipeline {
                 sh 'npm pack'
             }
         }
-
         // Push package to Artifactory
         stage('Push_APP_To_Artifactory') {
             steps {
