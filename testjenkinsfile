@@ -1,119 +1,15 @@
-
-/* pipeline{
-   agent any 
-   tools{
-    maven 'M2_HOME'
-   }
-   stages{
-    stage("maven"){
-        steps{ 
-        sh 'mvn clean validate compile install test package'
+pipeline {
+    agent {
+        docker {
+            image 'node:14'
+            args '-v /usr/local/bin:/usr/local/bin'
         }
     }
-    stage('upload artifact'){
-        steps{
-            sh 'curl -uadmin:AP8gcgmmset5jeYChTJYDN6XmDd -T \
-            target/bio*.jar \
-            "http://ec2-54-161-239-95.compute-1.amazonaws.com:8081/artifactory/geolocation/geo/bio_${BUILD_ID}.jar"'
-        }
-    }
-   }
-}
- */
-/*pipeline {
-    agent { docker { image 'node:14'
-            arg '-u root:root' } }
     stages {
-        stage('Dep install') {            
+        stage('Build') {
             steps {
-                //sh 'cat /etc/os-release'
-                //sh 'chown -R _apt /var/lib/apt/lists /var/cache/apt/archives/partial'
-                //sh 'apt-get update'
-                //sh 'apt-get install -y'
-                //sh 'chown -R 995:993 "/.npm"'
                 sh 'npm install'
             }
-        }stage (package){
-            steps{
-                sh 'npm pack'
-            }
-
         }
     }
 }
-*/
-/* pipeline{
-    agent { docker { image 'node:14'
-           args '-u root:root'}}
-    stages{
-      stage('Dep install'){ 
-        steps{
-         //   sh 'npm cache clean'
-         //   sh 'sudo chown -R 995:993 "/.npm"'
-            sh 'npm install'
-        }
-      }
-      stage(package){
-        steps{
-            sh 'rm -rf *.tgz || echo ""'
-        }
-      } 
-      stage('package'){
-        steps{
-            sh 'npm pack'
-        }
-      } 
-      stage('upload artifact'){
-        steps{
-            sh 'curl -uadmin:AP8gcgmmset5jeYChTJYDN6XmDd -T \
-            *tgz \
-            "http://ec2-18-204-10-74.compute-1.amazonaws.com:8081/artifactory/utc-nodejs/utc-app-${BUILD_ID}.tgz"'
-        }
-      } 
-    } 
-} */
-
-pipeline{
-    agent { docker { image 'node:14'
-           args '-u root:root'}}
-    stages{
-      stage('Dep install'){ 
-        steps{
-         //   sh 'npm cache clean'
-         //   sh 'sudo chown -R 995:993 "/.npm"'
-            sh 'npm install' 
-        }
-      } 
-      stage('package'){
-        steps{
-            sh 'npm pack'
-        }
-      } 
-      stage('upload artifact'){
-        steps{
-            sh 'curl -uadmin:AP8gcgmmset5jeYChTJYDN6XmDd -T \
-            *tgz \
-            "http://ec2-18-204-10-74.compute-1.amazonaws.com:8081/artifactory/utc-nodejs/utc-app-${BUILD_ID}.tgz"'
-        }
-      } 
-    } 
-}
-
-/* pipeline{
-    agent { docker { image 'node:14'
-           args '-u root:root'}}
-    stages{
-      stage('Dep install'){ 
-        steps{
-         //   sh 'npm cache clean'
-         //   sh 'sudo chown -R 995:993 "/.npm"'
-            sh 'npm install'
-        }
-      } 
-      stage('package'){
-        steps{
-            sh 'npm pack'
-        }
-      }       
-    } 
-} */
