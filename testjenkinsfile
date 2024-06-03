@@ -127,8 +127,8 @@
 } */
 
 pipeline {
-    "agent" {
-        any {
+    any {
+        docker {
             image 'node:14'
             args '-v /usr/local/bin:/usr/local/bin'
         }
