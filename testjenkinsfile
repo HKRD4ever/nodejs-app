@@ -99,7 +99,7 @@
     } 
 } */
 
-/* pipeline{
+pipeline{
     agent { docker { image 'node:14'
            args '-u root:root'}}
     stages{
@@ -116,8 +116,9 @@
         }
       }       
     } 
-} */
-pipeline{
+}
+ 
+/* pipeline{
   agent any
   stages{
     stage('Deep install npm'){
@@ -129,7 +130,7 @@ pipeline{
     }    
     }
   }
-}
+} */
 
 /* pipeline {
     agent {
