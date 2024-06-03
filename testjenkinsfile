@@ -120,8 +120,10 @@
 pipeline{
   agent any
   stages{
-    steps{
+    stage("install npm"){
+      steps{
       sh 'npm install'
+    }    
     }
   }
 }
