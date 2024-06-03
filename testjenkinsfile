@@ -123,7 +123,9 @@ pipeline{
     stage('Deep install npm'){
       agent{ docker { image 'nodejs'}}
       steps{
-      sh 'npm install'
+        sh 'sudo chown -R 995:993 "/.npm"'
+        sh 'npm install'
+      
     }    
     }
   }
