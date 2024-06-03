@@ -117,19 +117,19 @@
       }       
     } 
 } */
-pipeline{
+/* pipeline{
   agent any
   stages{
-    stage("install npm"){
+    stage("Dep install npm"){
       steps{
       sh 'npm install'
     }    
     }
   }
-}
+} */
 
-/* pipeline {
-    any {
+pipeline {
+    agent {
         docker {
             image 'node:14'
             args '-v /usr/local/bin:/usr/local/bin'
@@ -142,4 +142,4 @@ pipeline{
             }
         }
     }
-} */
+}
