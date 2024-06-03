@@ -120,7 +120,7 @@
 pipeline{
   agent any
   stages{
-    stage("Dep install npm"){
+    stage('Deep install npm'){
       agent{ docker { image 'node:14'}}
       steps{
       sh 'npm install'
