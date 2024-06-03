@@ -117,16 +117,16 @@
       }       
     } 
 } */
-/* pipeline{
+pipeline{
   agent any
   stages{
     steps{
       sh 'npm install'
     }
   }
-} */
+}
 
-pipeline {
+/* pipeline {
     any {
         docker {
             image 'node:14'
@@ -140,4 +140,4 @@ pipeline {
             }
         }
     }
-}
+} */
